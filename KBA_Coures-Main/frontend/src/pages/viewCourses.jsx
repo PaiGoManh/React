@@ -1,10 +1,18 @@
 import React from 'react';
 import { Link, useLoaderData, useParams } from 'react-router-dom';
 import banner from '../assets/images/banner-kba.png';
+import { useNavigate } from 'react-router-dom';
 
 const ViewCourses = () => {
   const course = useLoaderData();
   const { id } = useParams();
+  const navigate = useNavigate()
+  const deleteCourse = async () => {
+    const confirm = window.confirm('Sure want to delete?');
+    if (!confirm) return;
+      const res = await fetch(`/api/courses/${id}`, { method: 'DELETE' });
+      navigate('/courses');
+  };
 
   return (
     <>
@@ -69,7 +77,7 @@ const ViewCourses = () => {
           </div>
           <div className="flex flex-row justify-end gap-4 mr-[205px] ">
             <Link to={`/edit_course/${id}`} className="flex bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full h-10 w-32 focus:outline-none focus:shadow-outline justify-center items-center">Edit Course</Link>
-            <Link className="flex bg-red-500 hover:bg-red-600 text-white font-bold rounded-full h-10 w-32 focus:outline-none focus:shadow-outline justify-center items-center">Remove Course</Link>
+            <button onClick={()=>{ deleteCourse(id) }} className="flex bg-red-500 hover:bg-red-600 text-white font-bold rounded-full h-10 w-32 focus:outline-none focus:shadow-outline justify-center items-center">Remove Course</button>
           </div>
         </div>
       )}

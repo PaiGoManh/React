@@ -1,37 +1,38 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
-import { useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const EditCoursePage = () => {
-  const [title, setTitle] = useState('');
-  const [courseId, setCourseId] = useState('');
-  const [type, setType] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
-  const navigate = useNavigate(); 
+  const course = useLoaderData();
+  const [title, setTitle] = useState(course.title || '');
+  const [courseId, setCourseId] = useState(course.courseId || '');
+  const [type, setType] = useState(course.type || 'Self-Paced');
+  const [description, setDescription] = useState(course.description || '');
+  const [price, setPrice] = useState(course.price || 'Rs.5000');
+  const navigate = useNavigate();
 
-  const submitform = async (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
-    const newCourse = {
+    const updatedCourse = {
       title,
       courseId,
       type,
       description,
       price,
     };
-    const res = await addSubmitCourse(newCourse);
-    navigate('/courses');
+    await updateSubmitCourse(updatedCourse);
+    navigate(`/courses/${courseId}`);
   };
 
-  const addSubmitCourse = async (course) => {
-    const res = await fetch('http://localhost:5000/courses/', {
-      method: 'POST',
+  const updateSubmitCourse = async (updatedCourse) => {
+    const res = await fetch(`http://localhost:5000/courses/${course.courseId}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(course),
+      body: JSON.stringify(updatedCourse),
     });
-    return res;
+    return res.json(); // Assuming your API returns JSON
   };
 
   return (
@@ -41,15 +42,13 @@ const EditCoursePage = () => {
         <section className="bg-white mb-20">
           <div className="container m-auto max-w-2xl py-2">
             <div className="bg-purple-100 px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
-              <form onSubmit={submitform}>
+              <form onSubmit={submitForm}>
                 <h2 className="text-3xl text-purple-800 text-center font-semibold mb-6">
-                  Add Course
+                  Update Course
                 </h2>
 
                 <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">
-                    Course Name
-                  </label>
+                  <label className="block text-gray-700 font-bold mb-2">Course Name</label>
                   <input
                     type="text"
                     id="title"
@@ -63,9 +62,7 @@ const EditCoursePage = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">
-                    Course Id
-                  </label>
+                  <label className="block text-gray-700 font-bold mb-2">Course Id</label>
                   <input
                     type="text"
                     id="courseId"
@@ -79,9 +76,7 @@ const EditCoursePage = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="type" className="block text-gray-700 font-bold mb-2">
-                    Course Type
-                  </label>
+                  <label htmlFor="type" className="block text-gray-700 font-bold mb-2">Course Type</label>
                   <select
                     id="type"
                     name="type"
@@ -97,9 +92,7 @@ const EditCoursePage = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
-                    Description
-                  </label>
+                  <label htmlFor="description" className="block text-gray-700 font-bold mb-2">Description</label>
                   <textarea
                     id="description"
                     name="description"
@@ -113,9 +106,7 @@ const EditCoursePage = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="price" className="block text-gray-700 font-bold mb-2">
-                    Price
-                  </label>
+                  <label htmlFor="price" className="block text-gray-700 font-bold mb-2">Price</label>
                   <select
                     id="price"
                     name="price"
@@ -135,7 +126,7 @@ const EditCoursePage = () => {
                     className="bg-purple-500 hover:bg-purple-600 my-10 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
                     type="submit"
                   >
-                    Add Course
+                    Update Course
                   </button>
                 </div>
               </form>

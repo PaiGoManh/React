@@ -29,7 +29,7 @@ function App() {
         <Route path='/*' element={<Notfound/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/add_course' element={<AddCourses/>}/>
-        <Route path='/edit_course/:id' element={<EditCoursePage/>}/>
+        <Route path='/edit_course/:id' element={<EditCoursePage/>} loader={fetchCourse}/>
         <Route path='/courses/:id' element={<ViewCourses/>} loader={fetchCourse}/>
       {/* </Route> */}
       </>
