@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 
-const AddCourses = () => {
+const EditCoursePage = () => {
   const [title, setTitle] = useState('');
   const [courseId, setCourseId] = useState('');
   const [type, setType] = useState('');
@@ -24,7 +24,7 @@ const AddCourses = () => {
   };
 
   const addSubmitCourse = async (course) => {
-    const res = await fetch('/api/courses/', {
+    const res = await fetch('http://localhost:5000/courses/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -147,4 +147,4 @@ const AddCourses = () => {
   );
 };
 
-export default AddCourses;
+export default EditCoursePage;

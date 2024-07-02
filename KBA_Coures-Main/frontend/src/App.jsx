@@ -15,7 +15,8 @@ import CoursePage from './pages/CoursePage'
 import Notfound from './pages/Notfound'
 import Contact from './pages/Contact'
 import AddCourses from './pages/AddCourses'
-import ViewCourses from './pages/viewCourses'
+import ViewCourses, { fetchCourse } from './pages/viewCourses'
+import EditCoursePage from './pages/EditCoursePage'
 function App() {
   // const [count, setCount] = useState(0)
   const router=createBrowserRouter(
@@ -28,7 +29,8 @@ function App() {
         <Route path='/*' element={<Notfound/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/add_course' element={<AddCourses/>}/>
-        <Route path='/view_course' element={<ViewCourses/>}/>
+        <Route path='/edit_course/:id' element={<EditCoursePage/>}/>
+        <Route path='/courses/:id' element={<ViewCourses/>} loader={fetchCourse}/>
       {/* </Route> */}
       </>
     )

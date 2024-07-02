@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import rp from '../assets/images/rp.png'
 import {Link} from 'react-router-dom'
 
-function Crd({course } ) {
+function Crd({course} ) {
 
   const [showFull,setShow]=useState(false)
 
@@ -27,7 +27,7 @@ function Crd({course } ) {
 
     <p className='text-black group-hover:text-white my-2 mx-5'>{description} </p>
     <button className='flex w-full ml-10 mb-10 text-xl text-blue-400  hover:text-blue-900'onClick={viewMore}>{showFull?'less':'more'}</button>
-    <Link to="/view_course" className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 self-start mx-5">Learn More</Link>
+    <Link to={`/courses/${course.courseId}`} className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 self-start mx-5">Learn More</Link>
     </div>
     </div>
     
