@@ -4,11 +4,11 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const EditCoursePage = () => {
   const course = useLoaderData();
-  const [title, setTitle] = useState(course.title || '');
-  const [courseId, setCourseId] = useState(course.courseId || '');
-  const [type, setType] = useState(course.type || 'Self-Paced');
-  const [description, setDescription] = useState(course.description || '');
-  const [price, setPrice] = useState(course.price || 'Rs.5000');
+  const [title, setTitle] = useState(course.title);
+  const [courseId, setCourseId] = useState(course.courseId);
+  const [type, setType] = useState(course.type);
+  const [description, setDescription] = useState(course.description);
+  const [price, setPrice] = useState(course.price);
   const navigate = useNavigate();
 
   const submitForm = async (e) => {
@@ -32,7 +32,7 @@ const EditCoursePage = () => {
       },
       body: JSON.stringify(updatedCourse),
     });
-    return res.json(); // Assuming your API returns JSON
+    return res.json(); 
   };
 
   return (

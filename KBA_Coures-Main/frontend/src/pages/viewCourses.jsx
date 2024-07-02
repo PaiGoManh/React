@@ -86,7 +86,7 @@ const ViewCourses = () => {
 }
 
 const fetchCourse = async ({ params }) => {
-  const res = await fetch(`http://localhost:5000/courses/${params.id}`);
+  const res = await fetch(`/api/courses/${params.id}`);
   const data = await res.json();
   return data;
 }
