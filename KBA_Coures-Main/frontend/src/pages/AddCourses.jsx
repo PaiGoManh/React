@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddCourses = () => {
   const [title, setTitle] = useState('');
@@ -20,7 +22,7 @@ const AddCourses = () => {
       price,
     };
     const res = await addSubmitCourse(newCourse);
-    navigate('/courses');
+    toast.success("Course added /succesFully")
   };
 
   const addSubmitCourse = async (course) => {
@@ -37,6 +39,7 @@ const AddCourses = () => {
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <div>
         <section className="bg-white mb-20">
           <div className="container m-auto max-w-2xl py-2">

@@ -13,7 +13,7 @@ function Crd({course} ) {
     description=description.substring(0,100)+"  ..."
     }
 
-  const viewMore=()=>{
+  const toggleText=()=>{
     setShow(!showFull)
   }
 
@@ -26,7 +26,7 @@ function Crd({course} ) {
     <img src={rp} alt="course thumbnail" className='w-80 h-40 ' />
 
     <p className='text-black group-hover:text-white my-2 mx-5'>{description} </p>
-    <button className='flex w-full ml-10 mb-10 text-xl text-blue-400  hover:text-blue-900'onClick={viewMore}>{showFull?'less':'more'}</button>
+    <button className='flex w-full ml-10 mb-10 text-xl text-blue-400  hover:text-blue-900'onClick={toggleText}>{showFull?'less':'more'}</button>
     <Link to={`/courses/${course.courseId}`} className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 self-start mx-5">Learn More</Link>
     </div>
     </div>

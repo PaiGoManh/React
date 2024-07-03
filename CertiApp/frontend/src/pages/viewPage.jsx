@@ -1,29 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Certificate = () => {
-  const [certificates, setCertificates] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const { certificateData } = location.state || {};
 
-  useEffect(() => {
-    const fetchCertificates = async () => {
-      try {
-        const res = await fetch('http://localhost:5000/certificates');
-        const data = await res.json();
-        setCertificates(data);
-      } catch (error) {
-        console.log("Error", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCertificates();
-  }, []);
-
-  if (loading) {
+  if (!certificateData) {
     return <div>Loading...</div>;
   }
-
-  const certificate = certificates[0]; // Assuming you want to display the first certificate
 
   return (
     <div className="container mx-auto p-4">
@@ -37,7 +21,7 @@ const Certificate = () => {
             <div className="flex justify-center">
               <div className="w-2/12"></div>
               <div className="underline text-center font-bold w-8/12">
-                <span id="name">Name: {certificate.name}</span>
+                <span id="name">Name: {certificateData.name}</span>
               </div>
               <div className="w-2/12"></div>
             </div>
@@ -47,7 +31,7 @@ const Certificate = () => {
               <div className="w-2/12"></div>
               <div className="text-center w-8/12">
                 <span className="block italic">has earned</span>
-                <span id="grade" className="block font-bold">Grade: {certificate.grade}</span>
+                <span id="grade" className="block font-bold">Grade: {certificateData.grade}</span>
               </div>
               <div className="w-2/12"></div>
             </div>
@@ -65,7 +49,7 @@ const Certificate = () => {
             <div className="flex justify-center">
               <div className="w-2/12"></div>
               <div className="underline text-center font-bold w-8/12">
-                <span id="course">Course: {certificate.course}</span>
+                <span id="course">Course: {certificateData.course}</span>
               </div>
               <div className="w-2/12"></div>
             </div>
@@ -73,10 +57,10 @@ const Certificate = () => {
           <div className="mb-8">
             <div className="flex justify-between">
               <div>
-                <span id="ID" className="block font-bold">Certificate ID: {certificate.id}</span>
+                <span id="ID" className="block font-bold">Certificate ID: {certificateData.certificateID}</span>
               </div>
               <div className="text-right">
-                <span id="date" className="block">Date of Completion: {certificate.date}</span>
+                <span id="date" className="block">Date of Completion: {certificateData.date}</span>
                 <span className="block">Place: Trivandrum</span>
               </div>
             </div>

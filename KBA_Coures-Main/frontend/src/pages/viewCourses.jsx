@@ -2,14 +2,13 @@ import React from 'react';
 import { Link, useLoaderData, useParams } from 'react-router-dom';
 import banner from '../assets/images/banner-kba.png';
 import { useNavigate } from 'react-router-dom';
+import {BarLoader} from 'react-spinners'
 
 const ViewCourses = () => {
   const course = useLoaderData();
   const { id } = useParams();
   const navigate = useNavigate()
   const deleteCourse = async () => {
-    const confirm = window.confirm('Sure want to delete?');
-    if (!confirm) return;
       const res = await fetch(`/api/courses/${id}`, { method: 'DELETE' });
       navigate('/courses');
   };
@@ -17,7 +16,7 @@ const ViewCourses = () => {
   return (
     <>
       {!course ? (
-        <h1>Loading...</h1>
+        <h1><BarLoader/></h1>
       ) : (
         <div className="bg-white text-gray-900 mb-10 pb-10">
           <div className="max-w-4xl mx-auto p-5">

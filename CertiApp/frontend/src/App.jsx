@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/HomePage';
 import IssueCertificate from './pages/IssueCertificate';
 import CertificateIssued from './pages/CertificatePage';
-import ViewPage from './pages/viewPage'
+import ViewPage from './pages/viewPage';
 
 const App = () => {
   return (
@@ -12,9 +12,9 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/issue" element={<IssueCertificate />} />
+        <Route path="/certificates" element={<IssueCertificate />} />
         <Route path="/submit" element={<CertificateIssued />} />
-        <Route path="/view" element={<ViewPage />} />
+        <Route path="/certificate/:id" element={<ViewPage />} />
       </Routes>
     </Router>
   );
