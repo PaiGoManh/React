@@ -60,7 +60,7 @@ const Certificate = () => {
                 <span id="ID" className="block font-bold">Certificate ID: {certificateData.certificateID}</span>
               </div>
               <div className="text-right">
-                <span id="date" className="block">Date of Completion: {certificateData.date}</span>
+                <span id="date" className="block">Date of Completion: {certificateData.dateOfCompletion}</span>
                 <span className="block">Place: Trivandrum</span>
               </div>
             </div>

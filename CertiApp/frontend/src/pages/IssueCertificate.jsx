@@ -20,6 +20,7 @@ const IssueCertificate = () => {
       grade,
       place,
     };
+    console.log("Date",date)
     const res = await addSubmitCertificate(newCertificate);
     toast.success("Certificate Added Successfully");
   };
